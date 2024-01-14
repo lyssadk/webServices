@@ -1,7 +1,7 @@
 const { get } = require("../routes");
 
 function getName(){
-    return "Bob";
+    return "Jake Kucharyski";
 }
 
 function getSusan(){
