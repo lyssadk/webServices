@@ -1,11 +1,11 @@
 const { get } = require("../routes");
 
-function getName(){
+function getBrother(){
     return "Jake Kucharyski";
 }
 
-function getSusan(){
-    return "Susan";
+function getMom(){
+    return "Charity";
 }
 
 
@@ -14,7 +14,7 @@ function getSusan(){
 // }
 
 module.exports = {
-    "getName": getName,
-    "getSusan": getSusan
+    "getBrother": getBrother,
+    "getMom": getMom
 }
 
