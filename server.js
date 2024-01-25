@@ -10,17 +10,18 @@ const { MongoClient } = require('mongodb');
 const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Connect to the MongoDB server
-client.connect()
-   .then(() => {
-      console.log('Connected to MongoDB');
-      // You can start performing database operations here
-   })
-.catch(err => console.error('Error connecting to MongoDB:', err));
+client
+  .connect()
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // You can start performing database operations here
+  })
+  .catch((err) => console.error('Error connecting to MongoDB:', err));
 
-  // import mongoose  
-app.use('/', require('./routes'))
+// import mongoose
+app.use('/', require('./routes'));
 app.use(express.json());
 
 app.listen(port, () => {
-    console.log(`Running on port ${port}`)
-})
+  console.log(`Running on port ${port}`);
+});
