@@ -1,27 +1,24 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongodb = require('./db/connect');
+
+const port = process.env.PORT || 8080;
 const app = express();
-const port = process.env.PORT || 3000;
-require('dotenv').config();
-const mongoURI = process.env.MONGODB_URI;
-const { MongoClient } = require('mongodb');
 
-// Replace <your_database_url> with your MongoDB connection string
-
-const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Connect to the MongoDB server
-client
-  .connect()
-  .then(() => {
-    console.log('Connected to MongoDB');
-    // You can start performing database operations here
+app
+  .use(bodyParser.json())
+  .use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
   })
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
+  .use('/', require('./routes'));
 
-// import mongoose
-app.use('/', require('./routes'));
-app.use(express.json());
-
-app.listen(port, () => {
-  console.log(`Running on port ${port}`);
+mongodb.initDb((err, mongodb) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.listen(port);
+    console.log(`Connected to DB and listening on ${port}`);
+  }
 });
